@@ -25,7 +25,7 @@ export default function Footer() {
         <div>
           <h2 className="text-xl font-bold text-[#6E45E2]">vyomanexgen</h2>
           <p className="mt-4 w-60">
-            Pioneering cutting-edge technology solutions for tomorrow's
+            Pioneering cutting-edge technology solutions for tomorrow's business
             challenges.
           </p>
 
