@@ -1,6 +1,6 @@
 "use client";
 
-import React from "react";
+import React, { useMemo } from "react";
 import { motion } from "framer-motion";
 import {
   Palette,
@@ -27,10 +27,10 @@ import {
   MousePointer2,
   Accessibility,
   Receipt, // 👈 ADD THIS
-  CreditCard, // 👈 ADD THIS
-  PieChart, // 👈 ADD THIS
-  Contact, // 👈 ADD THIS
-PhoneCall, // 👈 ADD THIS
+  CreditCard, // 👈 ADD THIS
+  PieChart, // 👈 ADD THIS
+  Contact, // 👈 ADD THIS
+  PhoneCall, // 👈 ADD THIS
   Mic,       // 👈 ADD THIS
   PhoneOff,
 } from "lucide-react";
@@ -186,7 +186,7 @@ const WebDesignPlaceholder = ({ theme = 'blue' }) => {
           <div className={`w-full h-12 ${themeClasses.placeholderBG} rounded`}></div>
         </div>
       </motion.div>
-      
+
       {/* Floating Palette Icon */}
       <motion.div
         className={`absolute top-10 -left-2 md:left-4 w-16 h-16 ${themeClasses.iconBase} rounded-full flex items-center justify-center ${themeClasses.placeholderShadow}`}
@@ -259,9 +259,9 @@ const UiUxPlaceholder = ({ theme = 'pink' }) => {
       >
         <Users className={`w-8 h-8 ${isPinkTheme ? 'text-pink-300' : 'text-gray-400'}`} />
       </motion.div>
-      
+
       {/* Floating Button Element */}
-       <motion.div
+      <motion.div
         className={`absolute bottom-24 -left-2 md:left-8 w-28 h-10 ${isPinkTheme ? 'bg-gradient-to-r from-pink-600 to-fuchsia-700' : 'bg-gray-700'} rounded-lg flex items-center justify-center text-white font-semibold text-sm`}
         initial={{ y: 40, opacity: 0, rotate: 10 }}
         whileInView={{ y: 0, opacity: 1, rotate: 2 }}
@@ -308,7 +308,7 @@ const BrowserPlaceholder = ({ theme = 'orange' }) => { // 👈 Renamed to match 
           <div className="w-3 h-3 rounded-full bg-green-500"></div>
           <div className={`ml-2 flex-1 h-3 ${themeClasses.placeholderBG} rounded-full`}></div> {/* URL bar */}
         </div>
-        
+
         {/* Code Editor Area */}
         <div className="flex-1 overflow-hidden font-mono text-xs md:text-sm text-gray-300 space-y-1">
           <p><span className="text-orange-400">{'<div'}</span> <span className="text-blue-400">{'className="container"'}</span><span className="text-orange-400">{'>'}</span></p>
@@ -333,7 +333,7 @@ const BrowserPlaceholder = ({ theme = 'orange' }) => { // 👈 Renamed to match 
         <div className={`w-full h-12 ${themeClasses.placeholderBG} rounded`}></div> {/* Mobile Content */}
         <div className={`w-2/3 h-8 ${isOrangeTheme ? 'bg-orange-500' : 'bg-gray-700'} rounded-lg`}></div> {/* Mobile Button */}
       </motion.div>
-      
+
       {/* Floating Code Icon */}
       <motion.div
         className={`absolute top-10 -right-2 md:right-4 w-16 h-16 ${themeClasses.iconBase} rounded-full flex items-center justify-center ${themeClasses.placeholderShadow}`}
@@ -360,7 +360,7 @@ const MobilePlaceholder = ({ theme = 'violet' }) => {
   return (
     <motion.div
       // Set a consistent height that can contain the 320px (h-80) phones
-      className="relative w-full h-96 flex items-center justify-center p-4 overflow-hidden" 
+      className="relative w-full h-96 flex items-center justify-center p-4 overflow-hidden"
       initial={{ opacity: 0, x: -50 }} // Animate from left
       whileInView={{ opacity: 1, x: 0 }}
       viewport={{ amount: 0.3 }}
@@ -499,11 +499,11 @@ const ChatbotPlaceholder = ({ theme = 'green' }) => {
             <p className="text-sm text-green-400">Online</p>
           </div>
         </div>
-        
+
         {/* Chat Area */}
         <div className="flex-1 space-y-4 py-4 overflow-hidden">
           {/* Bubble Left */}
-          <motion.div 
+          <motion.div
             className="flex justify-start"
             initial={{ opacity: 0, x: -20 }}
             whileInView={{ opacity: 1, x: 0 }}
@@ -515,7 +515,7 @@ const ChatbotPlaceholder = ({ theme = 'green' }) => {
             </div>
           </motion.div>
           {/* Bubble Right */}
-          <motion.div 
+          <motion.div
             className="flex justify-end"
             initial={{ opacity: 0, x: 20 }}
             whileInView={{ opacity: 1, x: 0 }}
@@ -527,7 +527,7 @@ const ChatbotPlaceholder = ({ theme = 'green' }) => {
             </div>
           </motion.div>
           {/* Bubble Left with List */}
-          <motion.div 
+          <motion.div
             className="flex justify-start"
             initial={{ opacity: 0, x: -20 }}
             whileInView={{ opacity: 1, x: 0 }}
@@ -544,7 +544,7 @@ const ChatbotPlaceholder = ({ theme = 'green' }) => {
             </div>
           </motion.div>
         </div>
-        
+
         {/* Input Bar */}
         <div className="h-12 bg-gray-800 rounded-lg flex items-center px-4 gap-3">
           <span className="text-gray-500 text-sm">Type a message...</span>
@@ -570,32 +570,32 @@ const BillingPlaceholder = ({ theme = 'teal' }) => { // 👈 Changed default the
   // A helper to get a specific text color or a default
   const getTextColor = () => {
     return theme === 'violet' ? 'text-purple-200' :
-           theme === 'teal' ? 'text-teal-200' :
-           'text-gray-300';
+      theme === 'teal' ? 'text-teal-200' :
+        'text-gray-300';
   };
-  
+
   const getHeaderColor = () => {
     return theme === 'violet' ? 'text-purple-300' :
-           theme === 'teal' ? 'text-teal-300' :
-           'text-gray-400';
+      theme === 'teal' ? 'text-teal-300' :
+        'text-gray-400';
   };
-  
+
   const getTotalColor = () => {
     return theme === 'violet' ? 'text-purple-100' :
-           theme === 'teal' ? 'text-teal-100' :
-           'text-gray-100';
+      theme === 'teal' ? 'text-teal-100' :
+        'text-gray-100';
   };
-  
+
   const getChartColor = () => {
     return theme === 'violet' ? 'bg-purple-500' :
-           theme === 'teal' ? 'bg-teal-500' :
-           'bg-gray-500';
+      theme === 'teal' ? 'bg-teal-500' :
+        'bg-gray-500';
   };
 
   const getButtonGradient = () => {
     return theme === 'violet' ? 'bg-gradient-to-r from-purple-600 to-indigo-700' :
-           theme === 'teal' ? 'bg-gradient-to-r from-teal-600 to-cyan-700' :
-           'bg-gradient-to-r from-gray-600 to-gray-700';
+      theme === 'teal' ? 'bg-gradient-to-r from-teal-600 to-cyan-700' :
+        'bg-gradient-to-r from-gray-600 to-gray-700';
   };
 
   // Helper component for a single invoice line item
@@ -628,10 +628,10 @@ const BillingPlaceholder = ({ theme = 'teal' }) => { // 👈 Changed default the
         {/* Top bar */}
         <div className="flex justify-between items-center mb-4 pb-2 border-b border-gray-700">
           <div className={`w-1/3 h-5 ${themeClasses.placeholderBG} rounded flex items-center px-2`}>
-             <span className="text-xs font-semibold text-gray-400">Your Company Inc.</span>
+            <span className="text-xs font-semibold text-gray-400">Your Company Inc.</span>
           </div>
           <div className={`w-1/4 h-5 ${themeClasses.placeholderBG} rounded flex items-center px-2`}>
-             <span className="text-xs font-mono text-gray-400">INV #1024</span>
+            <span className="text-xs font-mono text-gray-400">INV #1024</span>
           </div>
         </div>
 
@@ -767,7 +767,7 @@ const AiAgentPlaceholder = ({ theme = 'violet' }) => {
           </motion.div>
           <p className="text-xl font-semibold text-white">AI Voice Agent</p>
           <p className="text-sm text-purple-300">Connecting...</p>
-          
+
           {/* Soundwave */}
           <div className="flex items-end h-10 gap-1">
             <SoundWaveBar height="60%" delay={0} />
@@ -788,19 +788,19 @@ const AiAgentPlaceholder = ({ theme = 'violet' }) => {
             </button>
           </div>
         </div>
-        
+
         {/* --- Recent SMS Section --- */}
         <div className="flex-1 p-4 space-y-3 overflow-hidden">
           <p className="text-sm font-semibold text-gray-400 mb-2">Recent SMS</p>
-          <SmsBubble 
-            text="Hi! Your appointment is confirmed for tomorrow at 2 PM." 
-            time="10:30 AM" 
-            delay={0.4} 
+          <SmsBubble
+            text="Hi! Your appointment is confirmed for tomorrow at 2 PM."
+            time="10:30 AM"
+            delay={0.4}
           />
-          <SmsBubble 
-            text="Thank you for your inquiry. Our team will call you shortly." 
-            time="Yesterday" 
-            delay={0.6} 
+          <SmsBubble
+            text="Thank you for your inquiry. Our team will call you shortly."
+            time="Yesterday"
+            delay={0.6}
           />
         </div>
       </motion.div>
@@ -868,7 +868,7 @@ const servicesData = [
   // --- NEW SERVICE 2 ---
   {
     id: 2,
-    slug: "ui-ux", 
+    slug: "ui-ux",
     tag: 'Design Services',
     title: 'UI/UX Research & Strategy',
     subtitle: 'Crafting intuitive experiences users love, backed by data',
@@ -900,7 +900,7 @@ const servicesData = [
   },
   {
     id: 3,
-    slug: "web-development", 
+    slug: "web-development",
     tag: 'Development Services',
     title: 'Website Development',
     subtitle: 'Powerful, scalable web applications built with modern technologies',
@@ -932,7 +932,7 @@ const servicesData = [
   },
   {
     id: 4,
-    slug: "mobile-apps", 
+    slug: "mobile-apps",
     tag: 'Mobile Solutions',
     title: 'Mobile App Development',
     subtitle: 'Native and cross-platform apps that users love',
@@ -1064,7 +1064,7 @@ const servicesData = [
     imageComponent: <BillingPlaceholder />,
     imagePosition: 'right', // Alternating position from the last one
   },
-{
+  {
     id: 8,
     slug: "ai-sms-calling-agents",
     tag: 'AI Solutions',
@@ -1112,11 +1112,11 @@ const FeatureItem = ({ icon: Icon, title, description, theme = 'violet' }) => {
         whileHover={{
           scale: 1.15,
         }}
-        
+
         transition={{ type: 'spring', stiffness: 300 }}
       >
-      
-        <motion.div 
+
+        <motion.div
           className={`w-full h-full flex items-center justify-center rounded-lg ${themeClasses.iconHover}`}
         >
           <Icon className="w-6 h-6" />
@@ -1136,95 +1136,94 @@ const FeatureItem = ({ icon: Icon, title, description, theme = 'violet' }) => {
 export default function ServicesApp() {
   return (
     <section id="services-section">
-  <div  className="min-h-screen bg-gray-950 text-gray-200 font-inter p-8 pt-32 md:p-16">
-      <div className="max-w-7xl mx-auto">
-        {/* UPDATED: Title changed to "Services" with new blue/violet gradient and hover effect */}
-        <motion.h1 
-          className="text-4xl md:text-6xl font-bold text-center mb-16 text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-purple-500 drop-shadow-[0_2px_4px_rgba(0,0,0,0.2)]"
-          initial={{ opacity: 0, y: -30 }}
-          animate={{ opacity: 1, y: 0 }}
-          whileHover={{ scale: 1.05 }}
-          transition={{ duration: 0.7, type: 'spring', stiffness: 100 }}
-        >
-          Services
-        </motion.h1>
+      <div className="min-h-screen bg-gray-950 text-gray-200 font-inter p-8 pt-32 md:p-16">
+        <div className="max-w-7xl mx-auto">
+          {/* UPDATED: Title changed to "Services" with new blue/violet gradient and hover effect */}
+          <motion.h1
+            className="text-4xl md:text-6xl font-bold text-center mb-16 text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-purple-500 drop-shadow-[0_2px_4px_rgba(0,0,0,0.2)]"
+            initial={{ opacity: 0, y: -30 }}
+            animate={{ opacity: 1, y: 0 }}
+            whileHover={{ scale: 1.05 }}
+            transition={{ duration: 0.7, type: 'spring', stiffness: 100 }}
+          >
+            Services
+          </motion.h1>
 
-        <div className="space-y-24 md:space-y-32">
-          {servicesData.map((service) => {
-            // Get the theme classes for the current service
-            const theme = colorThemes[service.theme] || colorThemes.violet;
-            
-            return (
-              <motion.section
-                key={service.id}
-                className={`flex flex-col ${
-                  service.imagePosition === 'right' ? 'md:flex-row' : 'md:flex-row-reverse'
-                } items-center gap-12 md:gap-16`}
-                initial={{ opacity: 0, y: 50 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ amount: 0.2 }} // REMOVED once: true
-                transition={{ duration: 0.7, ease: 'easeOut' }}
-              >
-                {/* FIX: This container has 'text-center' to center the tag,
+          <div className="space-y-24 md:space-y-32">
+            {servicesData.map((service) => {
+              // Get the theme classes for the current service
+              const theme = colorThemes[service.theme] || colorThemes.violet;
+
+              return (
+                <motion.section
+                  key={service.id}
+                  className={`flex flex-col ${service.imagePosition === 'right' ? 'md:flex-row' : 'md:flex-row-reverse'
+                    } items-center gap-12 md:gap-16`}
+                  initial={{ opacity: 0, y: 50 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ amount: 0.2 }} // REMOVED once: true
+                  transition={{ duration: 0.7, ease: 'easeOut' }}
+                >
+                  {/* FIX: This container has 'text-center' to center the tag,
                   title, and subtitle on all screen sizes, as you requested.
                   UPDATED: Width changed back to md:w-1/2
                 */}
-                <div className="w-full md:w-1/2 space-y-4 text-center">
-  <span className={`inline-block px-4 py-1 text-sm font-medium ${theme.tagBG} ${theme.tagText} ${theme.tagBorder} rounded-full`}>
-    {service.tag}
-  </span>
+                  <div className="w-full md:w-1/2 space-y-4 text-center">
+                    <span className={`inline-block px-4 py-1 text-sm font-medium ${theme.tagBG} ${theme.tagText} ${theme.tagBorder} rounded-full`}>
+                      {service.tag}
+                    </span>
 
-  <h2 className={`text-3xl md:text-4xl font-bold ${theme.title}`}>
-    {service.title}
-  </h2>
+                    <h2 className={`text-3xl md:text-4xl font-bold ${theme.title}`}>
+                      {service.title}
+                    </h2>
 
-  <p className={`text-lg ${theme.subtitle}`}>
-    {service.subtitle}
-  </p>
+                    <p className={`text-lg ${theme.subtitle}`}>
+                      {service.subtitle}
+                    </p>
 
-  <div className="space-y-6 pt-6 text-left">
-    {service.features.map((feature) => (
-      <FeatureItem
-        key={feature.title}
-        icon={feature.icon}
-        title={feature.title}
-        description={feature.description}
-        theme={service.theme}
-      />
-    ))}
-  </div>
+                    <div className="space-y-6 pt-6 text-left">
+                      {service.features.map((feature) => (
+                        <FeatureItem
+                          key={feature.title}
+                          icon={feature.icon}
+                          title={feature.title}
+                          description={feature.description}
+                          theme={service.theme}
+                        />
+                      ))}
+                    </div>
 
-  {/* ✅ Load More Button */}
-  <div className="mt-4 flex">
-  <Link href={`/services/${service.slug}`}>
-    <button
-      className="inline-flex items-center gap-2 px-4 py-2 rounded-lg
+                    {/* ✅ Load More Button */}
+                    <div className="mt-4 flex">
+                      <Link href={`/services/${service.slug}`}>
+                        <button
+                          className="inline-flex items-center gap-2 px-4 py-2 rounded-lg
       bg-gradient-to-r  text-white font-medium
       hover:opacity-90 transition-all duration-300"
-    >
-      Load More
-      <span className="text-lg transition-transform duration-300 group-hover:translate-x-1">→</span>
-    </button>
-  </Link>
-</div>
+                        >
+                          Load More
+                          <span className="text-lg transition-transform duration-300 group-hover:translate-x-1">→</span>
+                        </button>
+                      </Link>
+                    </div>
 
-</div>
+                  </div>
 
 
-                {/* Right Side (Image/Placeholder) 
+                  {/* Right Side (Image/Placeholder) 
                   UPDATED: Width changed back to md:w-1/2
                 */}
-                <div className="w-full md:w-1/2 min-h-[300px] md:min-h-[500px] flex items-center justify-center">
-                  {/* We must use React.cloneElement to add props to an existing element */}
-                  {React.cloneElement(service.imageComponent, { theme: service.theme })}
-                </div>
-              </motion.section>
-            );
-          })}
+                  <div className="w-full md:w-1/2 min-h-[300px] md:min-h-[500px] flex items-center justify-center">
+                    {/* We must use React.cloneElement to add props to an existing element */}
+                    {React.cloneElement(service.imageComponent, { theme: service.theme })}
+                  </div>
+                </motion.section>
+              );
+            })}
+          </div>
         </div>
       </div>
-    </div>
     </section>
   );
-  
+
 }

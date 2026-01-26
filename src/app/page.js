@@ -14,28 +14,37 @@
 
 
 
-"use client"; 
+"use client";
 
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef, Suspense } from 'react';
+import dynamic from 'next/dynamic';
 import Navbar from "./components/Navbar";
 import Hero from "./components/Hero";
 import ServicesApp from "./components/ServicesApp";
-import Portfolio from './components/Portfolio';
-import Testimonials from "./components/Testimonials";
-import Footer from './components/Footer';
+
+// Dynamic imports for below-the-fold components
+const Portfolio = dynamic(() => import('./components/Portfolio'), {
+  loading: () => <div className="min-h-screen flex items-center justify-center"><div className="animate-pulse text-gray-400">Loading...</div></div>
+});
+const Testimonials = dynamic(() => import("./components/Testimonials"), {
+  loading: () => <div className="min-h-screen flex items-center justify-center"><div className="animate-pulse text-gray-400">Loading...</div></div>
+});
+const Footer = dynamic(() => import('./components/Footer'), {
+  loading: () => <div className="h-32 flex items-center justify-center"><div className="animate-pulse text-gray-400">Loading...</div></div>
+});
 export default function Home() {
   const [navTheme, setNavTheme] = useState("light");
-  
+
   // We only need a ref for the section that changes the theme
   const servicesRef = useRef(null);
 
   useEffect(() => {
     const handleScroll = () => {
       const scrollY = window.scrollY;
-      
+
       // This is an offset so the theme changes just *before*
       // the section scrolls under the navbar. 100px is a good start.
-      const navOffset = 100; 
+      const navOffset = 100;
 
       if (servicesRef.current) {
         // Get the top AND bottom of the services section
@@ -49,7 +58,7 @@ export default function Home() {
         // 2. AND BEFORE the end of the services section (minus offset)
         // Then set theme to dark.
         if (
-          scrollY >= servicesTop - navOffset && 
+          scrollY >= servicesTop - navOffset &&
           scrollY < servicesBottom - navOffset
         ) {
           setNavTheme("dark");
@@ -75,22 +84,20 @@ export default function Home() {
     <>
       {/* Navbar is rendered ONCE here, theme is controlled by state */}
       <Navbar theme={navTheme} />
-      
+
       <Hero />
-      
+
       {/* This div now measures the height of ServicesApp */}
       <div ref={servicesRef}>
         <ServicesApp />
       </div>
-      
+
       {/* No ref is needed for the portfolio section anymore */}
       <div>
         <Portfolio />
- <div ref={servicesRef}>
         <Testimonials />
-      </div>
 
-<Footer/>
+        <Footer />
       </div>
     </>
   );

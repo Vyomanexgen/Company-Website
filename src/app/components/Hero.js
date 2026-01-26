@@ -2,6 +2,7 @@
 
 import { motion } from "framer-motion";
 import Link from "next/link";
+import Image from "next/image";
 
 export default function Hero() {
   const fadeInLeft = {
@@ -24,22 +25,28 @@ export default function Hero() {
   };
 
   return (
-    <div className="w-full relative overflow-hidden text-gray-900">
+    <div className="w-full relative overflow-hidden text-gray-900" id="home-section">
 
       {/* -------------------- HERO WITH BACKGROUND -------------------- */}
-      <div
-        className="w-full min-h-screen bg-cover bg-center bg-no-repeat relative"
-        style={{
-          backgroundImage: "url('/High-Tech Digital Banner with Holographic Elements.png')",  // <-- update your image path
-        }}
-      >
+      <div className="w-full min-h-screen relative">
+        {/* Optimized Background Image */}
+        <Image
+          src="/High-Tech Digital Banner with Holographic Elements.png"
+          alt="High-Tech Digital Banner Background"
+          fill
+          priority
+          quality={90}
+          className="object-cover object-center"
+          sizes="100vw"
+        />
+
         {/* Lighter overlay so the image is visible */}
         <div className="absolute inset-0 bg-black/10"></div>
 
         {/* HERO CONTENT */}
         <div className="relative z-10">
           <section className="flex flex-col items-center justify-center text-center pt-44 px-5">
-            
+
             <motion.h1
               variants={fadeInLeft}
               initial="hidden"
@@ -102,7 +109,7 @@ export default function Hero() {
                   transition={{ duration: 2.5, repeat: Infinity, ease: "easeInOut" }}
                   className="border border-cyan-500 px-8 py-3 rounded-lg text-lg font-semibold text-cyan-400 hover:bg-cyan-50"
                 >
-                  Let’s Talk 💬
+                  Let's Talk 💬
                 </motion.button>
               </Link>
             </motion.div>

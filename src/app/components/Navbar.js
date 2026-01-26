@@ -6,11 +6,12 @@ import { motion, AnimatePresence } from "framer-motion";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { FaWhatsapp, FaPhoneAlt } from "react-icons/fa";
+import Image from "next/image";
 
 
 const Logo = ({ theme }) => (
   <Link href="/" className="cursor-pointer flex items-center">
-    <img 
+    <img
       src="/vyomanexgen (1).png"   // <-- YOUR LOGO PATH HERE
       alt="Vyomanexgen Logo"
       className="h-10 w-auto md:h-14"
@@ -42,7 +43,7 @@ export default function Navbar() {
     light: "bg-white/70 backdrop-blur-md border-b border-gray-200 shadow-sm",
     dark: "bg-black/80 backdrop-blur-md border-b border-gray-800 shadow-lg",
   };
- const linkStyles = {
+  const linkStyles = {
     light: "text-gray-700 hover:text-cyan-600",
     dark: "text-gray-100 hover:text-cyan-300", // <-- MUCH BRIGHTER (was gray-300)
   };
@@ -104,63 +105,82 @@ export default function Navbar() {
     setActiveSection("home-section");
     setTheme("light");
 
-    const io = new IntersectionObserver(
-      (entries) => {
-        // Find all sections that are currently visible (intersecting)
-        const visibleEntries = entries.filter((e) => e.isIntersecting);
+    // Handler to check scroll position and update active section
+    const handleScroll = () => {
+      const scrollY = window.scrollY;
 
-        if (visibleEntries.length === 0) {
-          // If nothing is visible (e.g., in a gap), don't change anything
-          return;
-        }
-
-        // --- This is the new, robust logic ---
-        // Find the entry that is CLOSEST to the navbar's bottom edge
-        const [bestMatch] = visibleEntries.sort(
-          (a, b) =>
-            Math.abs(a.boundingClientRect.y - NAVBAR_HEIGHT) -
-            Math.abs(b.boundingClientRect.y - NAVBAR_HEIGHT)
-        );
-
-        // Find the matching theme/ID from our watchedSections array
-        const match = watchedSections.find(
-          (w) => w.id === bestMatch.target.id
-        );
-
-        if (match) {
-          setActiveSection(match.id);
-          setTheme(match.theme);
-        }
-      },
-      {
-        // A sensitive margin to create a "trigger window"
-        // It watches the top 60% of the screen, starting from below the navbar
-        rootMargin: `-${NAVBAR_HEIGHT}px 0px -40% 0px`,
-        // Fire as soon as any part of it enters this window
-        threshold: 0,
+      // If we're at the very top of the page, always set to home
+      if (scrollY < 100) {
+        setActiveSection("home-section");
+        setTheme("light");
+        return;
       }
-    );
 
-    // Observe all the sections from our array
-    watchedSections.forEach(({ id }) => {
-      const el = document.getElementById(id);
-      if (el) io.observe(el);
-    });
+      // Find which section is currently most visible
+      let currentSection = "home-section";
+      let currentTheme = "light";
+
+      watchedSections.forEach(({ id, theme }) => {
+        const element = document.getElementById(id);
+        if (element) {
+          const rect = element.getBoundingClientRect();
+          const elementTop = rect.top;
+          const elementBottom = rect.bottom;
+
+          // Check if this section is in the viewport
+          // Consider a section active if its top is above the middle of the screen
+          // and its bottom is below the navbar
+          if (elementTop <= NAVBAR_HEIGHT + 100 && elementBottom > NAVBAR_HEIGHT) {
+            currentSection = id;
+            currentTheme = theme;
+          }
+        }
+      });
+
+      setActiveSection(currentSection);
+      setTheme(currentTheme);
+    };
+
+    // Initial check
+    handleScroll();
+
+    // Add scroll listener with throttling for performance
+    let ticking = false;
+    const scrollListener = () => {
+      if (!ticking) {
+        window.requestAnimationFrame(() => {
+          handleScroll();
+          ticking = false;
+        });
+        ticking = true;
+      }
+    };
+
+    window.addEventListener("scroll", scrollListener, { passive: true });
 
     // Cleanup
-    return () => io.disconnect();
+    return () => {
+      window.removeEventListener("scroll", scrollListener);
+    };
   }, [pathname, watchedSections]); // Re-run only if path or sections change
 
   // --- END OF NEW LOGIC ---
 
   return (
     <nav
-      className={`fixed top-0 left-0 right-0 z-50 w-full px-4 sm:px-6 py-5 flex items-center justify-between transition-all duration-500 ${navStyles[theme]}`}
+      className={`fixed top-0 left-0 right-0 z-50 w-full px-4 sm:px-6 py-5 flex items-center justify-between transition-all duration-700 ease-in-out ${navStyles[theme]}`}
     >
       {/* Logo */}
-      <div className="h-14 w-60 flex items-center">
-            <img src="/vyomanexgen (1).png" alt="Vyomanexgen Logo" />
-          </div>
+      <div className="h-14 w-60 flex items-center relative">
+        <Image
+          src="/vyomanexgen (1).png"
+          alt="Vyomanexgen Logo"
+          width={240}
+          height={56}
+          priority
+          className="object-contain"
+        />
+      </div>
 
       {/* Desktop Menu */}
       <div className="hidden md:flex items-center gap-10">
@@ -169,21 +189,19 @@ export default function Navbar() {
             <li key={item.href} className="group">
               <Link
                 href={item.href}
-                className={`relative pb-1 transition-all ${
-                  activeSection === item.id // <-- This logic is correct
-                    ? "text-cyan-500 drop-shadow-[0_0_6px_rgba(34,211,238,0.7)]"
-                    : linkStyles[theme]
-                }`}
+                className={`relative pb-1 transition-all duration-300 ease-in-out ${activeSection === item.id // <-- This logic is correct
+                  ? "text-cyan-500 drop-shadow-[0_0_6px_rgba(34,211,238,0.7)]"
+                  : linkStyles[theme]
+                  }`}
               >
                 {item.name}
 
                 <span
                   className={`
-                    absolute left-0 -bottom-1 h-[2px] w-full bg-cyan-500 rounded-full transition-all
-                    ${
-                      activeSection === item.id // <-- This logic is correct
-                        ? "scale-x-100 shadow-[0_0_8px_2px_rgba(34,211,238,0.6)]"
-                        : "scale-x-0 group-hover:scale-x-100"
+                    absolute left-0 -bottom-1 h-[2px] w-full bg-cyan-500 rounded-full transition-all duration-300 ease-in-out
+                    ${activeSection === item.id // <-- This logic is correct
+                      ? "scale-x-100 shadow-[0_0_8px_2px_rgba(34,211,238,0.6)]"
+                      : "scale-x-0 group-hover:scale-x-100"
                     }
                   `}
                 ></span>
@@ -193,34 +211,34 @@ export default function Navbar() {
         </ul>
 
         {/* Get Started (desktop) */}
-      <div className="flex items-center gap-4">
-         {/* Call */}
-  <motion.a
-    href="tel:+917358105293"
-    whileHover={{ scale: 1.1 }}
-    whileTap={{ scale: 0.9 }}
-    className="flex items-center gap-2 bg-blue-600 px-4 py-2 rounded-md text-white font-semibold shadow-md"
-  >
-    <FaPhoneAlt size={16} />
-    Call
-  </motion.a>
+        <div className="flex items-center gap-4">
+          {/* Call */}
+          <motion.a
+            href="tel:+917358105293"
+            whileHover={{ scale: 1.1 }}
+            whileTap={{ scale: 0.9 }}
+            className="flex items-center gap-2 bg-blue-600 px-4 py-2 rounded-md text-white font-semibold shadow-md"
+          >
+            <FaPhoneAlt size={16} />
+            Call
+          </motion.a>
 
-  {/* WhatsApp */}
-  <motion.a
-    href="https://wa.me/917358105293?text=Hello%20Vyomanexgen%2C%20I%20want%20to%20know%20more."
-    target="_blank"
-    rel="noopener noreferrer"
-    whileHover={{ scale: 1.1 }}
-    whileTap={{ scale: 0.9 }}
-    className="flex items-center gap-2 bg-green-500 px-4 py-2 rounded-md text-white font-semibold shadow-md"
-  >
-    <FaWhatsapp size={18} />
-    WhatsApp
-  </motion.a>
+          {/* WhatsApp */}
+          <motion.a
+            href="https://wa.me/917358105293?text=Hello%20Vyomanexgen%2C%20I%20want%20to%20know%20more."
+            target="_blank"
+            rel="noopener noreferrer"
+            whileHover={{ scale: 1.1 }}
+            whileTap={{ scale: 0.9 }}
+            className="flex items-center gap-2 bg-green-500 px-4 py-2 rounded-md text-white font-semibold shadow-md"
+          >
+            <FaWhatsapp size={18} />
+            WhatsApp
+          </motion.a>
 
- 
 
-</div>
+
+        </div>
 
       </div>
 
@@ -240,16 +258,22 @@ export default function Navbar() {
             animate={{ x: 0 }}
             exit={{ x: "100%" }}
             transition={{ duration: 0.35 }}
-           className={`fixed top-0 right-0 w-full h-screen overflow-y-auto flex flex-col p-6 pt-14 ${mobileMenuStyles[theme]} md:hidden`}
+            className={`fixed top-0 right-0 w-full h-screen overflow-y-auto flex flex-col p-6 pt-14 ${mobileMenuStyles[theme]} md:hidden`}
 
 
-            //className={`fixed top-0 right-0 w-full h-screen flex flex-col items-center gap-10 p-10 ${mobileMenuStyles[theme]} md:hidden`}
+          //className={`fixed top-0 right-0 w-full h-screen flex flex-col items-center gap-10 p-10 ${mobileMenuStyles[theme]} md:hidden`}
           >
             {/* Top bar */}
             <div className="w-full flex justify-between items-center">
-                   <div className="h-12 w-30 flex items-center">
-            <img src="/vyomanexgen (1).png" alt="Vyomanexgen Logo" />
-          </div>
+              <div className="h-12 w-30 flex items-center relative">
+                <Image
+                  src="/vyomanexgen (1).png"
+                  alt="Vyomanexgen Logo"
+                  width={120}
+                  height={48}
+                  className="object-contain"
+                />
+              </div>
               <button
                 onClick={() => setMenuOpen(false)}
                 className="text-cyan-400 text-lg px-4 py-2"
@@ -259,64 +283,63 @@ export default function Navbar() {
             </div>
 
             {/* Links */}
-           {/* Links */}
-          <ul className="flex flex-col items-center gap-6 text-2xl font-semibold mt-4 mb-6">
+            {/* Links */}
+            <ul className="flex flex-col items-center gap-6 text-2xl font-semibold mt-4 mb-6">
 
-            {navLinks.map((item) => (
-              <li key={item.href} className="group">
-                <Link
-                  href={item.href}
-                  onClick={() => setMenuOpen(false)}
-                  className={`relative transition-all ${
-                    activeSection === item.id
+              {navLinks.map((item) => (
+                <li key={item.href} className="group">
+                  <Link
+                    href={item.href}
+                    onClick={() => setMenuOpen(false)}
+                    className={`relative transition-all ${activeSection === item.id
                       ? theme === "light"
                         ? "text-cyan-500" // Active light
                         : "text-cyan-300" // Active dark
                       : linkStyles[theme] // Inactive (uses text-gray-100 on dark)
-                  }`}
-                >
-                  {item.name}
-                  {/* Optional: Add underline for mobile active link */}
-                  <span
-                    className={`
+                      }`}
+                  >
+                    {item.name}
+                    {/* Optional: Add underline for mobile active link */}
+                    <span
+                      className={`
                       absolute left-0 -bottom-1 h-[2px] w-full
                       ${theme === 'light' ? 'bg-cyan-500' : 'bg-cyan-300'}
                       ${activeSection === item.id ? 'scale-x-100' : 'scale-x-0'}
                     `}
-                  ></span>
-                </Link>
-              </li>   
-            ))}
-          </ul>
+                    ></span>
+                  </Link>
+                </li>
+              ))}
+            </ul>
 
             {/* Get Started (mobile) */}
-           <div className="flex flex-col items-center gap-4 mb-10 w-full">
+            <div className="flex flex-col items-center gap-4 mb-10 w-full">
 
-  {/* WhatsApp Mobile */}
-  <motion.a
-    href="https://wa.me/917358105293?text=Hello%20Vyomanexgen%2C%20I%20want%20to%20know%20more."
-    target="_blank"
-    rel="noopener noreferrer"
-    whileHover={{ scale: 1.05 }}
-    whileTap={{ scale: 0.95 }}
-    className="flex items-center gap-2 bg-green-500 px-4 py-2 rounded-md text-white font-semibold shadow-md justify-center w-[70%] max-w-[260px]"
-  >
-    <FaWhatsapp size={20} />
-    WhatsApp
-  </motion.a>
+              {/* WhatsApp Mobile */}
+              <motion.a
+                href="https://wa.me/917358105293?text=Hello%20Vyomanexgen%2C%20I%20want%20to%20know%20more."
+                target="_blank"
+                rel="noopener noreferrer"
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                className="flex items-center gap-2 bg-green-500 px-4 py-2 rounded-md text-white font-semibold shadow-md justify-center w-[70%] max-w-[260px]"
+              >
+                <FaWhatsapp size={20} />
+                WhatsApp
+              </motion.a>
 
-  {/* Call Mobile */}
-  <motion.a
-    href="tel:+917358105293"
-    whileHover={{ scale: 1.05 }}
-    whileTap={{ scale: 0.95 }}
-    className="flex items-center gap-2 bg-blue-600 px-4 py-2 rounded-md text-white font-semibold shadow-md justify-center w-[70%] max-w-[260px]"
-  >
-    <FaPhoneAlt size={18} />
-    Call
-  </motion.a>
+              {/* Call Mobile */}
+              <motion.a
+                href="tel:+917358105293"
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                className="flex items-center gap-2 bg-blue-600 px-4 py-2 rounded-md text-white font-semibold shadow-md justify-center w-[70%] max-w-[260px]"
+              >
+                <FaPhoneAlt size={18} />
+                Call
+              </motion.a>
 
-</div>
+            </div>
 
 
           </motion.div>
