@@ -15,14 +15,6 @@ export default function Hero() {
     visible: { opacity: 1, x: 0, transition: { duration: 1 } },
   };
 
-  const floating = {
-    y: [0, -8, 0],
-    transition: {
-      duration: 3,
-      repeat: Infinity,
-      ease: "easeInOut",
-    },
-  };
 
   return (
     <div className="w-full relative overflow-hidden text-gray-900" id="home-section">
@@ -31,11 +23,11 @@ export default function Hero() {
       <div className="w-full min-h-screen relative">
         {/* Optimized Background Image */}
         <Image
-          src="/High-Tech Digital Banner with Holographic Elements.png"
+          src="/hero-banner.webp"
           alt="High-Tech Digital Banner Background"
           fill
           priority
-          quality={90}
+          quality={75}
           className="object-cover object-center"
           sizes="100vw"
         />
@@ -51,7 +43,7 @@ export default function Hero() {
               variants={fadeInLeft}
               initial="hidden"
               whileInView="visible"
-              viewport={{ amount: 0.3 }}
+              viewport={{ amount: 0.3, once: true }}
               className="text-5xl md:text-6xl font-extrabold leading-tight mb-2 font-[Poppins] text-white"
             >
               <span className="bg-gradient-to-r from-cyan-500 via-blue-600 to-purple-600 bg-clip-text text-transparent drop-shadow-md">
@@ -63,7 +55,7 @@ export default function Hero() {
               variants={fadeInRight}
               initial="hidden"
               whileInView="visible"
-              viewport={{ amount: 0.3 }}
+              viewport={{ amount: 0.3, once: true }}
               className="text-5xl md:text-6xl font-extrabold leading-tight mb-6 font-[Poppins] text-white"
             >
               <span className="bg-gradient-to-r from-purple-600 via-blue-600 to-cyan-500 bg-clip-text text-transparent drop-shadow-md">
@@ -74,7 +66,7 @@ export default function Hero() {
             <motion.p
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ amount: 0.3 }}
+              viewport={{ amount: 0.3, once: true }}
               transition={{ duration: 0.8 }}
               className="text-gray-200 max-w-2xl text-lg md:text-xl mb-10"
             >
@@ -85,7 +77,7 @@ export default function Hero() {
             <motion.div
               initial={{ opacity: 0, y: 40 }}
               whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ amount: 0.3 }}
+              viewport={{ amount: 0.3, once: true }}
               transition={{ delay: 0.4, duration: 0.8 }}
               className="flex flex-wrap gap-6 justify-center"
             >
@@ -93,9 +85,7 @@ export default function Hero() {
                 <motion.button
                   whileHover={{ scale: 1.1 }}
                   whileTap={{ scale: 0.95 }}
-                  animate={{ scale: [1, 1.05, 1] }}
-                  transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
-                  className="bg-gradient-to-r from-cyan-500 to-blue-600 px-8 py-3 rounded-lg text-lg font-semibold text-white shadow-md"
+                  className="bg-gradient-to-r from-cyan-500 to-blue-600 px-8 py-3 rounded-lg text-lg font-semibold text-white shadow-md transition-transform"
                 >
                   Explore Services
                 </motion.button>
@@ -105,9 +95,7 @@ export default function Hero() {
                 <motion.button
                   whileHover={{ scale: 1.1 }}
                   whileTap={{ scale: 0.95 }}
-                  animate={{ scale: [1, 1.05, 1] }}
-                  transition={{ duration: 2.5, repeat: Infinity, ease: "easeInOut" }}
-                  className="border border-cyan-500 px-8 py-3 rounded-lg text-lg font-semibold text-cyan-400 hover:bg-cyan-50"
+                  className="border border-cyan-500 px-8 py-3 rounded-lg text-lg font-semibold text-cyan-400 hover:bg-cyan-50 transition-transform"
                 >
                   Let's Talk 💬
                 </motion.button>
@@ -131,7 +119,7 @@ export default function Hero() {
             variants={card.dir === "left" ? fadeInLeft : fadeInRight}
             initial="hidden"
             whileInView="visible"
-            viewport={{ amount: 0.3 }}
+            viewport={{ amount: 0.3, once: true }}
             whileHover={{
               scale: 1.08,
               boxShadow: "0px 0px 20px rgba(56,189,248,0.5)",
@@ -139,14 +127,14 @@ export default function Hero() {
             transition={{ duration: 0.6 }}
             className="w-48 h-32 bg-white border border-gray-200 rounded-xl flex flex-col items-center justify-center shadow-lg"
           >
-            <motion.div animate={floating}>
+            <div>
               <h3 className="text-3xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-cyan-500 via-blue-600 to-purple-600">
                 {card.title}
               </h3>
               <p className="text-gray-600 mt-1 font-semibold text-sm text-center">
                 {card.subtitle}
               </p>
-            </motion.div>
+            </div>
           </motion.div>
         ))}
       </section>

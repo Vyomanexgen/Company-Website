@@ -145,7 +145,7 @@ const WebDesignPlaceholder = ({ theme = 'blue' }) => {
       className="relative w-full h-80 md:h-96 flex items-center justify-center p-4"
       initial={{ opacity: 0, x: 50 }} // Animate from right
       whileInView={{ opacity: 1, x: 0 }}
-      viewport={{ amount: 0.3 }}
+      viewport={{ amount: 0.3, once: true }}
       transition={{ duration: 0.7, ease: 'easeOut' }}
     >
       {/* Main Desktop Artboard */}
@@ -153,7 +153,7 @@ const WebDesignPlaceholder = ({ theme = 'blue' }) => {
         className={`w-full max-w-lg h-64 md:h-72 bg-gray-900/50 rounded-lg border-2 ${themeClasses.placeholderBorder} ${themeClasses.placeholderShadow} p-3 flex flex-col`}
         initial={{ y: 20, opacity: 0 }}
         whileInView={{ y: 0, opacity: 1 }}
-        viewport={{ amount: 0.3 }}
+        viewport={{ amount: 0.3, once: true }}
         transition={{ duration: 0.5, delay: 0.2 }}
       >
         {/* Browser bar */}
@@ -177,7 +177,7 @@ const WebDesignPlaceholder = ({ theme = 'blue' }) => {
         className={`absolute bottom-4 -right-2 md:right-4 w-28 h-56 bg-gray-900/70 rounded-2xl border-2 ${themeClasses.placeholderBorder} ${themeClasses.placeholderShadow} p-2`}
         initial={{ y: 40, opacity: 0, rotate: 10 }}
         whileInView={{ y: 0, opacity: 1, rotate: 5 }}
-        viewport={{ amount: 0.3 }}
+        viewport={{ amount: 0.3, once: true }}
         transition={{ duration: 0.5, delay: 0.4 }}
       >
         <div className="w-full h-full space-y-2">
@@ -192,7 +192,7 @@ const WebDesignPlaceholder = ({ theme = 'blue' }) => {
         className={`absolute top-10 -left-2 md:left-4 w-16 h-16 ${themeClasses.iconBase} rounded-full flex items-center justify-center ${themeClasses.placeholderShadow}`}
         initial={{ y: 40, opacity: 0, rotate: -15 }}
         whileInView={{ y: 0, opacity: 1, rotate: -5 }}
-        viewport={{ amount: 0.3 }}
+        viewport={{ amount: 0.3, once: true }}
         transition={{ duration: 0.5, delay: 0.6 }}
       >
         <Palette className={`w-8 h-8 ${isBlueTheme ? 'text-blue-300' : 'text-gray-400'}`} />
@@ -216,7 +216,7 @@ const UiUxPlaceholder = ({ theme = 'pink' }) => {
       className="relative w-full h-80 md:h-96 flex items-center justify-center p-4"
       initial={{ opacity: 0, x: -50 }} // Animate from left
       whileInView={{ opacity: 1, x: 0 }}
-      viewport={{ amount: 0.3 }}
+      viewport={{ amount: 0.3, once: true }}
       transition={{ duration: 0.7, ease: 'easeOut' }}
     >
       {/* Main Artboard (Phone Screen) */}
@@ -224,7 +224,7 @@ const UiUxPlaceholder = ({ theme = 'pink' }) => {
         className={`w-48 h-full max-h-80 md:max-h-96 bg-gray-900/50 rounded-2xl border-2 ${themeClasses.placeholderBorder} ${themeClasses.placeholderShadow} p-3 flex flex-col items-center space-y-3`}
         initial={{ y: 20, opacity: 0 }}
         whileInView={{ y: 0, opacity: 1 }}
-        viewport={{ amount: 0.3 }}
+        viewport={{ amount: 0.3, once: true }}
         transition={{ duration: 0.5, delay: 0.2 }}
       >
         <div className={`w-full h-12 ${themeClasses.placeholderBG} rounded-lg`}></div> {/* Header/Image */}
@@ -239,7 +239,7 @@ const UiUxPlaceholder = ({ theme = 'pink' }) => {
         className={`absolute top-10 -left-4 md:left-4 w-40 h-24 bg-gray-900/60 rounded-lg border-2 ${themeClasses.placeholderBorder} ${themeClasses.placeholderShadow} p-2 flex items-center gap-2`}
         initial={{ y: 40, opacity: 0, rotate: -15 }}
         whileInView={{ y: 0, opacity: 1, rotate: -5 }}
-        viewport={{ amount: 0.3 }}
+        viewport={{ amount: 0.3, once: true }}
         transition={{ duration: 0.5, delay: 0.4 }}
       >
         <div className={`w-1/3 h-full ${isPinkTheme ? 'bg-pink-500/50' : 'bg-gray-700'} rounded`}></div>
@@ -254,7 +254,7 @@ const UiUxPlaceholder = ({ theme = 'pink' }) => {
         className={`absolute bottom-12 -right-4 md:right-4 w-16 h-16 ${isPinkTheme ? 'bg-pink-500/30' : 'bg-gray-800'} rounded-full flex items-center justify-center border-2 ${themeClasses.placeholderBorder} ${themeClasses.placeholderShadow}`}
         initial={{ y: 40, opacity: 0, rotate: 15 }}
         whileInView={{ y: 0, opacity: 1, rotate: 5 }}
-        viewport={{ amount: 0.3 }}
+        viewport={{ amount: 0.3, once: true }}
         transition={{ duration: 0.5, delay: 0.5 }}
       >
         <Users className={`w-8 h-8 ${isPinkTheme ? 'text-pink-300' : 'text-gray-400'}`} />
@@ -265,7 +265,7 @@ const UiUxPlaceholder = ({ theme = 'pink' }) => {
         className={`absolute bottom-24 -left-2 md:left-8 w-28 h-10 ${isPinkTheme ? 'bg-gradient-to-r from-pink-600 to-fuchsia-700' : 'bg-gray-700'} rounded-lg flex items-center justify-center text-white font-semibold text-sm`}
         initial={{ y: 40, opacity: 0, rotate: 10 }}
         whileInView={{ y: 0, opacity: 1, rotate: 2 }}
-        viewport={{ amount: 0.3 }}
+        viewport={{ amount: 0.3, once: true }}
         transition={{ duration: 0.5, delay: 0.6 }}
       >
         Sign Up
@@ -290,7 +290,7 @@ const BrowserPlaceholder = ({ theme = 'orange' }) => { // 👈 Renamed to match 
       className="relative w-full h-80 md:h-96 flex items-center justify-center p-4 overflow-hidden"
       initial={{ opacity: 0, x: 50 }} // Animate from right
       whileInView={{ opacity: 1, x: 0 }}
-      viewport={{ amount: 0.3 }}
+      viewport={{ amount: 0.3, once: true }}
       transition={{ duration: 0.7, ease: 'easeOut' }}
     >
       {/* Main Desktop Browser Window with Code */}
@@ -298,7 +298,7 @@ const BrowserPlaceholder = ({ theme = 'orange' }) => { // 👈 Renamed to match 
         className={`w-full max-w-lg h-64 md:h-72 bg-gray-900/50 rounded-lg border-2 ${themeClasses.placeholderBorder} ${themeClasses.placeholderShadow} p-3 flex flex-col`}
         initial={{ y: 20, opacity: 0 }}
         whileInView={{ y: 0, opacity: 1 }}
-        viewport={{ amount: 0.3 }}
+        viewport={{ amount: 0.3, once: true }}
         transition={{ duration: 0.5, delay: 0.2 }}
       >
         {/* Browser controls */}
@@ -326,7 +326,7 @@ const BrowserPlaceholder = ({ theme = 'orange' }) => { // 👈 Renamed to match 
         className={`absolute bottom-4 -left-2 md:left-4 w-28 h-56 bg-gray-900/70 rounded-2xl border-2 ${themeClasses.placeholderBorder} ${themeClasses.placeholderShadow} p-2 flex flex-col justify-between items-center`}
         initial={{ y: 40, opacity: 0, rotate: -10 }}
         whileInView={{ y: 0, opacity: 1, rotate: -5 }}
-        viewport={{ amount: 0.3 }}
+        viewport={{ amount: 0.3, once: true }}
         transition={{ duration: 0.5, delay: 0.4 }}
       >
         <div className={`w-full h-8 ${themeClasses.placeholderBG} rounded`}></div> {/* Mobile Header */}
@@ -339,7 +339,7 @@ const BrowserPlaceholder = ({ theme = 'orange' }) => { // 👈 Renamed to match 
         className={`absolute top-10 -right-2 md:right-4 w-16 h-16 ${themeClasses.iconBase} rounded-full flex items-center justify-center ${themeClasses.placeholderShadow}`}
         initial={{ y: 40, opacity: 0, rotate: 15 }}
         whileInView={{ y: 0, opacity: 1, rotate: 5 }}
-        viewport={{ amount: 0.3 }}
+        viewport={{ amount: 0.3, once: true }}
         transition={{ duration: 0.5, delay: 0.6 }}
       >
         <Code className={`w-8 h-8 ${isOrangeTheme ? 'text-orange-300' : 'text-gray-400'}`} />
@@ -363,7 +363,7 @@ const MobilePlaceholder = ({ theme = 'violet' }) => {
       className="relative w-full h-96 flex items-center justify-center p-4 overflow-hidden"
       initial={{ opacity: 0, x: -50 }} // Animate from left
       whileInView={{ opacity: 1, x: 0 }}
-      viewport={{ amount: 0.3 }}
+      viewport={{ amount: 0.3, once: true }}
       transition={{ duration: 0.7, ease: 'easeOut' }}
     >
       {/* Android Phone (Back / Right) */}
@@ -372,7 +372,7 @@ const MobilePlaceholder = ({ theme = 'violet' }) => {
         className={`absolute w-44 h-80 bg-gray-900/50 rounded-3xl border-4 ${themeClasses.placeholderBorder} ${themeClasses.placeholderShadow} p-3`}
         initial={{ y: 40, opacity: 0, rotate: 0 }}
         whileInView={{ y: 0, opacity: 1, rotate: 10, x: 40 }} // Move right
-        viewport={{ amount: 0.3 }}
+        viewport={{ amount: 0.3, once: true }}
         transition={{ duration: 0.5, delay: 0.2 }}
       >
         <div className="w-full h-full flex flex-col items-center space-y-4 pt-2">
@@ -388,7 +388,7 @@ const MobilePlaceholder = ({ theme = 'violet' }) => {
         className={`absolute w-44 h-80 bg-gray-900/70 rounded-3xl border-4 ${themeClasses.placeholderBorder} ${themeClasses.placeholderShadow} p-3`}
         initial={{ y: 40, opacity: 0, rotate: 0 }}
         whileInView={{ y: 0, opacity: 1, rotate: -8, x: -40 }} // Move left
-        viewport={{ amount: 0.3 }}
+        viewport={{ amount: 0.3, once: true }}
         transition={{ duration: 0.5, delay: 0.4 }}
       >
         <div className="w-full h-full flex flex-col items-center space-y-4 pt-2">
@@ -422,7 +422,7 @@ const CrmPlaceholder = ({ theme = 'gradient' }) => {
       className="w-full h-[400px] md:h-96 flex items-center justify-center p-4"
       initial={{ opacity: 0, x: 50 }}
       whileInView={{ opacity: 1, x: 0 }}
-      viewport={{ amount: 0.3 }}
+      viewport={{ amount: 0.3, once: true }}
       transition={{ duration: 0.7, ease: 'easeOut' }}
     >
       <div className={`w-full h-full max-w-lg bg-gray-900/40 rounded-lg border-2 ${themeClasses.placeholderBorder} ${themeClasses.placeholderShadow} p-4 space-y-4 flex flex-col`}>
@@ -453,7 +453,7 @@ const CrmPlaceholder = ({ theme = 'gradient' }) => {
               className={`w-[10%] ${height} bg-gradient-to-t from-blue-500 to-cyan-400 rounded-t-sm origin-bottom`}
               initial={{ scaleY: 0 }}
               whileInView={{ scaleY: 1 }}
-              viewport={{ amount: 0.3 }}
+              viewport={{ amount: 0.3, once: true }}
               transition={{ duration: 0.5, delay: 0.2 + i * 0.05 }}
             >
             </motion.div>
@@ -485,7 +485,7 @@ const ChatbotPlaceholder = ({ theme = 'green' }) => {
       className="w-full h-[450px] md:h-[500px] flex items-center justify-center p-4"
       initial={{ opacity: 0, x: -50 }} // Changed to x: -50
       whileInView={{ opacity: 1, x: 0 }}
-      viewport={{ amount: 0.3 }} // REMOVED once: true
+      viewport={{ amount: 0.3, once: true }} // REMOVED once: true
       transition={{ duration: 0.7, ease: 'easeOut' }}
     >
       <div className={`w-full h-full max-w-lg bg-gray-900/40 rounded-lg border-2 ${themeClasses.placeholderBorder} ${themeClasses.placeholderShadow} p-4 flex flex-col`}>
@@ -507,7 +507,7 @@ const ChatbotPlaceholder = ({ theme = 'green' }) => {
             className="flex justify-start"
             initial={{ opacity: 0, x: -20 }}
             whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ amount: 0.3 }} // REMOVED once: true
+            viewport={{ amount: 0.3, once: true }} // REMOVED once: true
             transition={{ duration: 0.5, delay: 0.2 }}
           >
             <div className="p-3 bg-gray-800 rounded-lg rounded-bl-none max-w-xs text-sm">
@@ -519,7 +519,7 @@ const ChatbotPlaceholder = ({ theme = 'green' }) => {
             className="flex justify-end"
             initial={{ opacity: 0, x: 20 }}
             whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ amount: 0.3 }} // REMOVED once: true
+            viewport={{ amount: 0.3, once: true }} // REMOVED once: true
             transition={{ duration: 0.5, delay: 0.4 }}
           >
             <div className={`p-3 ${themeClasses.placeholderBG} border ${themeClasses.placeholderBorder} rounded-lg rounded-br-none max-w-xs text-sm`}>
@@ -531,7 +531,7 @@ const ChatbotPlaceholder = ({ theme = 'green' }) => {
             className="flex justify-start"
             initial={{ opacity: 0, x: -20 }}
             whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ amount: 0.3 }} // REMOVED once: true
+            viewport={{ amount: 0.3, once: true }} // REMOVED once: true
             transition={{ duration: 0.5, delay: 0.6 }}
           >
             <div className="p-3 bg-gray-800 rounded-lg rounded-bl-none max-w-xs text-sm space-y-2">
@@ -614,7 +614,7 @@ const BillingPlaceholder = ({ theme = 'teal' }) => { // 👈 Changed default the
       className="relative w-full h-[450px] md:h-[500px] flex items-center justify-center p-4 overflow-hidden"
       initial={{ opacity: 0, x: 50 }}
       whileInView={{ opacity: 1, x: 0 }}
-      viewport={{ amount: 0.3 }}
+      viewport={{ amount: 0.3, once: true }}
       transition={{ duration: 0.7, ease: 'easeOut' }}
     >
       {/* Main Container */}
@@ -622,7 +622,7 @@ const BillingPlaceholder = ({ theme = 'teal' }) => { // 👈 Changed default the
         className={`absolute w-[90%] md:w-[80%] max-w-lg h-[90%] bg-gray-900/50 rounded-lg border-2 ${themeClasses.placeholderBorder} ${themeClasses.placeholderShadow} p-4 flex flex-col`}
         initial={{ y: 20, opacity: 0 }}
         whileInView={{ y: 0, opacity: 1 }}
-        viewport={{ amount: 0.3 }}
+        viewport={{ amount: 0.3, once: true }}
         transition={{ duration: 0.5, delay: 0.2 }}
       >
         {/* Top bar */}
@@ -676,7 +676,7 @@ const BillingPlaceholder = ({ theme = 'teal' }) => { // 👈 Changed default the
         className={`absolute bottom-8 left-4 md:left-8 w-40 h-32 bg-gray-900/60 rounded-lg border-2 ${themeClasses.placeholderBorder} ${themeClasses.placeholderShadow} p-2 flex items-end justify-between`}
         initial={{ y: 40, opacity: 0, rotate: -5 }}
         whileInView={{ y: 0, opacity: 1, rotate: 0 }}
-        viewport={{ amount: 0.3 }}
+        viewport={{ amount: 0.3, once: true }}
         transition={{ duration: 0.5, delay: 0.4 }}
       >
         {[...Array(4)].map((_, i) => (
@@ -685,7 +685,7 @@ const BillingPlaceholder = ({ theme = 'teal' }) => { // 👈 Changed default the
             className={`w-6 ${['h-1/2', 'h-3/4', 'h-1/3', 'h-2/3'][i]} ${getChartColor()} rounded-t-sm`}
             initial={{ height: '0%' }}
             whileInView={{ height: ['h-1/2', 'h-3/4', 'h-1/3', 'h-2/3'][i] }}
-            viewport={{ amount: 0.3 }}
+            viewport={{ amount: 0.3, once: true }}
             transition={{ duration: 0.4, delay: 0.6 + i * 0.1 }}
           ></motion.div>
         ))}
@@ -696,7 +696,7 @@ const BillingPlaceholder = ({ theme = 'teal' }) => { // 👈 Changed default the
         className={`absolute top-8 right-4 md:right-8 w-28 h-12 ${getButtonGradient()} rounded-lg flex items-center justify-center text-white font-semibold text-sm`}
         initial={{ y: -40, opacity: 0, rotate: 5 }}
         whileInView={{ y: 0, opacity: 1, rotate: 0 }}
-        viewport={{ amount: 0.3 }}
+        viewport={{ amount: 0.3, once: true }}
         transition={{ duration: 0.5, delay: 0.6 }}
       >
         Pay Now
@@ -711,17 +711,13 @@ const BillingPlaceholder = ({ theme = 'teal' }) => { // 👈 Changed default the
 const AiAgentPlaceholder = ({ theme = 'violet' }) => {
   const themeClasses = colorThemes[theme] || colorThemes.violet;
 
-  // Helper for soundwave bars
+  // Helper for soundwave bars — uses CSS animation for performance
   const SoundWaveBar = ({ height, delay }) => (
-    <motion.div
+    <div
       className={`w-1.5 ${themeClasses.placeholderBG}`}
-      initial={{ height: "20%" }}
-      animate={{ height: ["20%", height, "20%"] }}
-      transition={{
-        duration: 1.5,
-        repeat: Infinity,
-        delay: delay,
-        ease: "easeInOut",
+      style={{
+        animation: `soundWave 1.5s ease-in-out ${delay}s infinite`,
+        height: '20%',
       }}
     />
   );
@@ -732,7 +728,7 @@ const AiAgentPlaceholder = ({ theme = 'violet' }) => {
       className={`w-full p-3 ${themeClasses.placeholderBG} border ${themeClasses.placeholderBorder} rounded-lg`}
       initial={{ opacity: 0, x: -20 }}
       whileInView={{ opacity: 1, x: 0 }}
-      viewport={{ amount: 0.3 }}
+      viewport={{ amount: 0.3, once: true }}
       transition={{ duration: 0.5, delay: delay }}
     >
       <p className="text-sm text-gray-200">{text}</p>
@@ -745,7 +741,7 @@ const AiAgentPlaceholder = ({ theme = 'violet' }) => {
       className="relative w-full h-full flex items-center justify-center p-4"
       initial={{ opacity: 0, x: -50 }} // Animate from left
       whileInView={{ opacity: 1, x: 0 }}
-      viewport={{ amount: 0.3 }}
+      viewport={{ amount: 0.3, once: true }}
       transition={{ duration: 0.7, ease: 'easeOut' }}
     >
       {/* Main Container */}
@@ -753,18 +749,17 @@ const AiAgentPlaceholder = ({ theme = 'violet' }) => {
         className={`relative w-full max-w-sm h-[550px] bg-gray-900/50 rounded-xl border-2 ${themeClasses.placeholderBorder} ${themeClasses.placeholderShadow} flex flex-col overflow-hidden`}
         initial={{ y: 20, opacity: 0 }}
         whileInView={{ y: 0, opacity: 1 }}
-        viewport={{ amount: 0.3 }}
+        viewport={{ amount: 0.3, once: true }}
         transition={{ duration: 0.5, delay: 0.2 }}
       >
         {/* --- AI Voice Agent Section --- */}
         <div className="flex-1 flex flex-col items-center justify-center p-6 space-y-3 border-b-2 border-gray-700">
-          <motion.div
+          <div
             className={`w-20 h-20 rounded-full ${themeClasses.placeholderBG} border-4 ${themeClasses.placeholderBorder} flex items-center justify-center`}
-            animate={{ scale: [1, 1.1, 1] }}
-            transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
+            style={{ animation: 'gentlePulse 2s ease-in-out infinite' }}
           >
             <PhoneCall className="w-10 h-10 text-purple-300" />
-          </motion.div>
+          </div>
           <p className="text-xl font-semibold text-white">AI Voice Agent</p>
           <p className="text-sm text-purple-300">Connecting...</p>
 
@@ -810,7 +805,7 @@ const AiAgentPlaceholder = ({ theme = 'violet' }) => {
         className="absolute top-8 -right-4 md:right-0 w-40 bg-gray-800 p-3 rounded-lg border border-gray-700 shadow-xl"
         initial={{ y: 40, opacity: 0, rotate: 10 }}
         whileInView={{ y: 0, opacity: 1, rotate: 5 }}
-        viewport={{ amount: 0.3 }}
+        viewport={{ amount: 0.3, once: true }}
         transition={{ duration: 0.5, delay: 0.4 }}
       >
         <p className="text-xs text-gray-400">Engagement Rate</p>
@@ -1161,7 +1156,7 @@ export default function ServicesApp() {
                     } items-center gap-12 md:gap-16`}
                   initial={{ opacity: 0, y: 50 }}
                   whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ amount: 0.2 }} // REMOVED once: true
+                  viewport={{ amount: 0.2, once: true }} // REMOVED once: true
                   transition={{ duration: 0.7, ease: 'easeOut' }}
                 >
                   {/* FIX: This container has 'text-center' to center the tag,

@@ -41,44 +41,44 @@ export default function Home() {
   useEffect(() => {
     const handleScroll = () => {
       const scrollY = window.scrollY;
-
-      // This is an offset so the theme changes just *before*
-      // the section scrolls under the navbar. 100px is a good start.
       const navOffset = 100;
 
       if (servicesRef.current) {
-        // Get the top AND bottom of the services section
         const servicesTop = servicesRef.current.offsetTop;
         const servicesHeight = servicesRef.current.offsetHeight;
         const servicesBottom = servicesTop + servicesHeight;
 
-        // NEW, MORE ROBUST LOGIC:
-        // If the scroll position is:
-        // 1. PAST the start of the services section (minus offset)
-        // 2. AND BEFORE the end of the services section (minus offset)
-        // Then set theme to dark.
         if (
           scrollY >= servicesTop - navOffset &&
           scrollY < servicesBottom - navOffset
         ) {
           setNavTheme("dark");
         } else {
-          // Otherwise, we are in Hero (top) or Portfolio (bottom)
           setNavTheme("light");
         }
       } else {
-        // Fallback for when ref is not ready
         setNavTheme("light");
       }
     };
 
-    window.addEventListener('scroll', handleScroll);
-
-    // Clean up the event listener
-    return () => {
-      window.removeEventListener('scroll', handleScroll);
+    // Throttle scroll with requestAnimationFrame for smooth performance
+    let ticking = false;
+    const scrollListener = () => {
+      if (!ticking) {
+        window.requestAnimationFrame(() => {
+          handleScroll();
+          ticking = false;
+        });
+        ticking = true;
+      }
     };
-  }, []); // Empty dependency array, runs once on mount
+
+    window.addEventListener('scroll', scrollListener, { passive: true });
+
+    return () => {
+      window.removeEventListener('scroll', scrollListener);
+    };
+  }, []);
 
   return (
     <>

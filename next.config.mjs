@@ -7,6 +7,18 @@ const nextConfig = {
         protocol: "https",
         hostname: "via.placeholder.com",
       },
+      {
+        protocol: "https",
+        hostname: "organic-fruit-box.vercel.app",
+      },
+      {
+        protocol: "https",
+        hostname: "mydukurhotel.netlify.app",
+      },
+      {
+        protocol: "https",
+        hostname: "placehold.co",
+      },
     ],
     formats: ['image/webp', 'image/avif'],
     deviceSizes: [640, 750, 828, 1080, 1200, 1920, 2048, 3840],
@@ -31,14 +43,9 @@ const nextConfig = {
   // Optimize output
   output: 'standalone',
 
-  // Performance optimizations
-  swcMinify: true,
-  
+
   // Reduce build output
   productionBrowserSourceMaps: false,
-
-  // Optimize fonts
-  optimizeFonts: true,
 
   // Experimental features for better performance
   experimental: {

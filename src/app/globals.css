@@ -234,3 +234,29 @@ li:hover a {
     @apply bg-background text-foreground;
   }
 }
+
+/* Performance: CSS keyframes for animations (replaces framer-motion infinite loops) */
+@keyframes soundWave {
+  0%, 100% {
+    height: 20%;
+  }
+  50% {
+    height: 80%;
+  }
+}
+
+@keyframes gentlePulse {
+  0%, 100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.1);
+  }
+}
+
+/* GPU acceleration for animated elements on mobile */
+.will-change-transform {
+  will-change: transform;
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+}

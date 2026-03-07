@@ -1,7 +1,7 @@
 "use client";
 import { useState, useEffect } from "react";
-import { motion, useScroll, useTransform, AnimatePresence } from "framer-motion";
-import Navbar from "./Navbar";
+import { motion, AnimatePresence } from "framer-motion";
+
 
 // ---------------- TESTIMONIAL DATA ----------------
 const testimonials = [
@@ -61,23 +61,14 @@ export default function Testimonials() {
   // ---------------- VISIBLE ITEMS ----------------
   const visible = testimonials.slice(index, index + itemsPerSlide);
 
-  // ---------------- PARALLAX ----------------
-  const { scrollY } = useScroll();
-  const parallaxY = useTransform(scrollY, [0, 500], [0, 160]);
+
 
   return (
     <section
       id="testimonials-section"
       className="relative w-full min-h-screen overflow-hidden bg-black text-white"
     >
-      {/* Parallax Background */}
-      <motion.div
-        style={{ y: parallaxY }}
-        className="absolute inset-0 bg-black"
-      />
-
       <div className="relative z-10">
-        <Navbar />
 
         <div className="max-w-6xl mx-auto text-center py-24 px-6">
 
@@ -86,7 +77,7 @@ export default function Testimonials() {
             initial={{ x: -80, opacity: 0 }}
             whileInView={{ x: 0, opacity: 1 }}
             transition={{ duration: 0.8 }}
-            viewport={{ amount: 0.5 }}
+            viewport={{ amount: 0.5, once: true }}
             className="text-5xl font-extrabold mb-4 
             bg-gradient-to-r from-blue-400 to-purple-500 text-transparent bg-clip-text"
           >
@@ -98,7 +89,7 @@ export default function Testimonials() {
             initial={{ x: -80, opacity: 0 }}
             whileInView={{ x: 0, opacity: 1 }}
             transition={{ duration: 1 }}
-            viewport={{ amount: 0.5 }}
+            viewport={{ amount: 0.5, once: true }}
             className="text-gray-300 max-w-2xl mx-auto mb-14 text-xl italic"
           >
             &ldquo;Your satisfaction is our greatest achievement — every experience tells a story.&rdquo;
@@ -149,11 +140,10 @@ export default function Testimonials() {
             }).map((_, i) => (
               <div
                 key={i}
-                className={`w-3 h-3 rounded-full transition-all ${
-                  index / itemsPerSlide === i
+                className={`w-3 h-3 rounded-full transition-all ${index / itemsPerSlide === i
                     ? "bg-[#2596be] scale-125"
                     : "bg-gray-600"
-                }`}
+                  }`}
               ></div>
             ))}
           </div>
