@@ -1,6 +1,6 @@
 "use client";
 
-import { motion, AnimatePresence } from "framer-motion";
+import { AnimatePresence, motion } from "framer-motion";
 import { useEffect, useState } from "react";
 
 export default function Loader() {
@@ -10,7 +10,7 @@ export default function Loader() {
     useEffect(() => {
         const timer = setTimeout(() => {
             setIsLoading(false);
-        }, 2800);
+        }, 3000);
 
         return () => clearTimeout(timer);
     }, []);
@@ -20,283 +20,203 @@ export default function Loader() {
             {isLoading && (
                 <motion.div
                     initial={{ opacity: 1 }}
-                    exit={{ opacity: 0, scale: 1.05 }}
-                    transition={{ duration: 0.6, ease: "easeInOut" }}
-                    className="fixed inset-0 z-[9999] flex items-center justify-center overflow-hidden"
-                    style={{ background: "linear-gradient(135deg, #020014 0%, #05001a 30%, #0a0030 60%, #10004a 100%)" }}
+                    exit={{ opacity: 0 }}
+                    transition={{ duration: 0.5, ease: "easeInOut" }}
+                    className="fixed inset-0 z-[9999] flex items-center justify-center"
+                    style={{ backgroundColor: "#0d0d1a" }}
                 >
-                    {/* Floating Orbs Background */}
-                    <div className="absolute inset-0 overflow-hidden">
-                        <div className="loader-orb loader-orb-1"></div>
-                        <div className="loader-orb loader-orb-2"></div>
-                        <div className="loader-orb loader-orb-3"></div>
-                    </div>
-
-                    {/* Scan Line Effect */}
-                    <div className="loader-scanline"></div>
-
                     {/* Main Content */}
-                    <div className="relative z-10 flex flex-col items-center gap-10">
+                    <div className="flex flex-col items-center gap-8">
 
-                        {/* Hexagonal Logo Mark */}
-                        <div className="loader-hex-container">
-                            <div className="loader-hex">
-                                <div className="loader-hex-inner">
-                                    <span className="loader-hex-letter">V</span>
-                                </div>
-                            </div>
-                            {/* Orbiting Particles */}
-                            <div className="loader-orbit">
-                                <div className="loader-particle"></div>
-                            </div>
-                            <div className="loader-orbit loader-orbit-2">
-                                <div className="loader-particle loader-particle-2"></div>
-                            </div>
+                        {/* Spinner Ring with Logo */}
+                        <div style={{ position: "relative", width: "110px", height: "110px" }}>
+                            <svg
+                                className="loader-ring-svg"
+                                viewBox="0 0 120 120"
+                                style={{ position: "absolute", top: 0, left: 0, width: "100%", height: "100%" }}
+                            >
+                                {/* Background track ring */}
+                                <circle
+                                    cx="60"
+                                    cy="60"
+                                    r="54"
+                                    fill="none"
+                                    stroke="rgba(255,255,255,0.06)"
+                                    strokeWidth="3"
+                                />
+                                {/* Animated spinner ring */}
+                                <circle
+                                    className="loader-ring-circle"
+                                    cx="60"
+                                    cy="60"
+                                    r="54"
+                                    fill="none"
+                                    stroke="#22d3ee"
+                                    strokeWidth="3"
+                                    strokeLinecap="round"
+                                    strokeDasharray="240 100"
+                                />
+                            </svg>
+                            {/* Company Logo inside ring */}
+                            <img
+                                src="/icon.png"
+                                alt="Vyomanexgen Logo"
+                                style={{
+                                    position: "absolute",
+                                    top: "50%",
+                                    left: "50%",
+                                    transform: "translate(-50%, -50%)",
+                                    width: "48px",
+                                    height: "48px",
+                                    objectFit: "contain",
+                                }}
+                            />
                         </div>
 
-                        {/* Letter-by-Letter Text Reveal */}
-                        <div className="flex items-center gap-[3px] md:gap-[5px]">
+                        {/* Brand Name */}
+                        <div className="loader-brand-text">
                             {brandName.split("").map((letter, i) => (
                                 <span
                                     key={i}
-                                    className="loader-letter"
-                                    style={{ animationDelay: `${0.5 + i * 0.08}s` }}
+                                    className="loader-brand-letter"
+                                    style={{ animationDelay: `${0.8 + i * 0.06}s` }}
                                 >
                                     {letter}
                                 </span>
                             ))}
                         </div>
 
-                        {/* Animated Tagline */}
-                        <div className="loader-tagline-wrapper">
-                            <p className="loader-tagline">
-                                Digital Solutions for Modern Businesses
-                            </p>
-                        </div>
+                        {/* Tagline */}
+                        <p className="loader-tagline">
+                            Digital Solutions for Modern Businesses
+                        </p>
 
                         {/* Progress Bar */}
-                        <div className="loader-progress-track">
-                            <div className="loader-progress-bar"></div>
+                        <div className="loader-bar-track">
+                            <div className="loader-bar-fill"></div>
                         </div>
                     </div>
 
                     <style jsx>{`
-                        /* === Floating Orbs === */
-                        .loader-orb {
-                            position: absolute;
-                            border-radius: 50%;
-                            filter: blur(80px);
-                            opacity: 0.3;
-                            animation: orbFloat 8s ease-in-out infinite;
-                        }
-                        .loader-orb-1 {
-                            width: 300px; height: 300px;
-                            background: radial-gradient(circle, #6366f1, transparent);
-                            top: -100px; left: -100px;
-                            animation-delay: 0s;
-                        }
-                        .loader-orb-2 {
-                            width: 250px; height: 250px;
-                            background: radial-gradient(circle, #06b6d4, transparent);
-                            bottom: -80px; right: -80px;
-                            animation-delay: -3s;
-                        }
-                        .loader-orb-3 {
-                            width: 200px; height: 200px;
-                            background: radial-gradient(circle, #a855f7, transparent);
-                            top: 50%; left: 60%;
-                            animation-delay: -5s;
-                        }
-
-                        /* === Scan Line === */
-                        .loader-scanline {
-                            position: absolute;
-                            top: 0;
-                            left: 0;
-                            right: 0;
-                            height: 2px;
-                            background: linear-gradient(90deg, transparent, #22d3ee, #a855f7, transparent);
-                            animation: scanDown 2.5s ease-in-out infinite;
-                            opacity: 0.6;
-                            box-shadow: 0 0 20px rgba(34, 211, 238, 0.5);
-                        }
-
-                        /* === Hexagonal Logo === */
-                        .loader-hex-container {
+                        /* === Spinner Ring Container === */
+                        .loader-ring-container {
                             position: relative;
-                            width: 120px;
-                            height: 120px;
+                            width: 110px;
+                            height: 110px;
+                        }
+                        .loader-ring-svg {
+                            width: 100%;
+                            height: 100%;
+                            animation: ringRotate 1.8s linear infinite;
+                        }
+                        .loader-ring-circle {
+                            transform-origin: center;
+                        }
+
+                        /* === Logo inside ring === */
+                        .loader-logo-wrapper {
+                            position: absolute;
+                            inset: 0;
                             display: flex;
                             align-items: center;
                             justify-content: center;
-                        }
-                        .loader-hex {
-                            width: 90px;
-                            height: 90px;
-                            position: relative;
-                            animation: hexRotate 4s ease-in-out infinite;
-                        }
-                        .loader-hex::before {
-                            content: '';
-                            position: absolute;
-                            inset: -3px;
-                            background: conic-gradient(from 0deg, #06b6d4, #6366f1, #a855f7, #ec4899, #06b6d4);
-                            clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
-                            animation: hexBorderSpin 3s linear infinite;
-                        }
-                        .loader-hex-inner {
-                            position: absolute;
-                            inset: 3px;
-                            background: linear-gradient(135deg, #0a0025, #15003d);
-                            clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
-                            display: flex;
-                            align-items: center;
-                            justify-content: center;
-                        }
-                        .loader-hex-letter {
-                            font-size: 2rem;
-                            font-weight: 800;
-                            background: linear-gradient(135deg, #22d3ee, #a855f7);
-                            -webkit-background-clip: text;
-                            -webkit-text-fill-color: transparent;
-                            background-clip: text;
-                            animation: letterPulse 2s ease-in-out infinite;
-                        }
-
-                        /* === Orbiting Particles === */
-                        .loader-orbit {
-                            position: absolute;
-                            inset: -15px;
-                            animation: orbitSpin 3s linear infinite;
-                        }
-                        .loader-orbit-2 {
-                            inset: -25px;
-                            animation-duration: 4.5s;
-                            animation-direction: reverse;
-                        }
-                        .loader-particle {
-                            position: absolute;
-                            top: 0;
-                            left: 50%;
-                            transform: translateX(-50%);
-                            width: 8px;
-                            height: 8px;
-                            background: #22d3ee;
-                            border-radius: 50%;
-                            box-shadow: 0 0 15px #22d3ee, 0 0 30px rgba(34, 211, 238, 0.3);
-                        }
-                        .loader-particle-2 {
-                            width: 6px;
-                            height: 6px;
-                            background: #a855f7;
-                            box-shadow: 0 0 15px #a855f7, 0 0 30px rgba(168, 85, 247, 0.3);
-                        }
-
-                        /* === Letter Animation === */
-                        .loader-letter {
-                            display: inline-block;
-                            font-size: 1.5rem;
-                            font-weight: 700;
-                            letter-spacing: 0.15em;
-                            color: transparent;
-                            background: linear-gradient(135deg, #22d3ee 0%, #6366f1 50%, #a855f7 100%);
-                            -webkit-background-clip: text;
-                            background-clip: text;
                             opacity: 0;
-                            transform: translateY(20px) rotateX(90deg);
-                            animation: letterReveal 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+                            animation: logoFadeIn 0.5s ease-out 0.2s forwards;
+                        }
+                        .loader-logo-img {
+                            width: 48px;
+                            height: 48px;
+                            object-fit: contain;
+                        }
+
+                        /* === Brand Name === */
+                        .loader-brand-text {
+                            display: flex;
+                            align-items: center;
+                            gap: 3px;
+                        }
+                        .loader-brand-letter {
+                            display: inline-block;
+                            font-size: 1.4rem;
+                            font-weight: 600;
+                            letter-spacing: 0.18em;
+                            color: rgba(255, 255, 255, 0.92);
+                            opacity: 0;
+                            transform: translateY(12px);
+                            animation: letterUp 0.4s ease-out forwards;
                         }
 
                         /* === Tagline === */
-                        .loader-tagline-wrapper {
-                            overflow: hidden;
-                        }
                         .loader-tagline {
-                            font-size: 0.85rem;
-                            color: rgba(148, 163, 184, 0.8);
-                            letter-spacing: 0.25em;
+                            font-size: 0.8rem;
+                            color: rgba(148, 163, 184, 0.7);
+                            letter-spacing: 0.2em;
                             text-transform: uppercase;
-                            animation: slideUp 0.6s ease-out 1.8s both;
+                            opacity: 0;
+                            animation: fadeIn 0.5s ease-out 1.6s forwards;
                         }
 
                         /* === Progress Bar === */
-                        .loader-progress-track {
-                            width: 200px;
+                        .loader-bar-track {
+                            width: 180px;
                             height: 2px;
-                            background: rgba(255, 255, 255, 0.08);
-                            border-radius: 10px;
+                            background: rgba(255, 255, 255, 0.06);
+                            border-radius: 2px;
                             overflow: hidden;
+                            margin-top: 4px;
                         }
-                        .loader-progress-bar {
+                        .loader-bar-fill {
                             width: 0%;
                             height: 100%;
-                            background: linear-gradient(90deg, #06b6d4, #6366f1, #a855f7);
-                            border-radius: 10px;
-                            animation: progressFill 2.5s cubic-bezier(0.4, 0, 0.2, 1) 0.3s forwards;
-                            box-shadow: 0 0 10px rgba(99, 102, 241, 0.5);
+                            background: #22d3ee;
+                            border-radius: 2px;
+                            animation: barGrow 2.6s ease-in-out 0.4s forwards;
                         }
 
                         /* === KEYFRAMES === */
-                        @keyframes orbFloat {
-                            0%, 100% { transform: translate(0, 0) scale(1); }
-                            33% { transform: translate(30px, -20px) scale(1.1); }
-                            66% { transform: translate(-20px, 15px) scale(0.95); }
-                        }
-
-                        @keyframes scanDown {
-                            0% { top: -2px; opacity: 0; }
-                            10% { opacity: 0.6; }
-                            90% { opacity: 0.6; }
-                            100% { top: 100%; opacity: 0; }
-                        }
-
-                        @keyframes hexRotate {
-                            0%, 100% { transform: rotate(0deg) scale(1); }
-                            25% { transform: rotate(2deg) scale(1.02); }
-                            50% { transform: rotate(0deg) scale(1.05); }
-                            75% { transform: rotate(-2deg) scale(1.02); }
-                        }
-
-                        @keyframes hexBorderSpin {
+                        @keyframes ringRotate {
                             to { transform: rotate(360deg); }
                         }
 
-                        @keyframes orbitSpin {
-                            to { transform: rotate(360deg); }
+                        @keyframes logoFadeIn {
+                            from { opacity: 0; }
+                            to { opacity: 1; }
                         }
 
-                        @keyframes letterPulse {
-                            0%, 100% { opacity: 0.8; filter: brightness(1); }
-                            50% { opacity: 1; filter: brightness(1.3); }
-                        }
-
-                        @keyframes letterReveal {
+                        @keyframes letterUp {
                             to {
                                 opacity: 1;
-                                transform: translateY(0) rotateX(0deg);
+                                transform: translateY(0);
                             }
                         }
 
-                        @keyframes slideUp {
-                            from { transform: translateY(100%); opacity: 0; }
-                            to { transform: translateY(0); opacity: 1; }
+                        @keyframes fadeIn {
+                            to { opacity: 1; }
                         }
 
-                        @keyframes progressFill {
+                        @keyframes barGrow {
                             0% { width: 0%; }
-                            20% { width: 15%; }
-                            50% { width: 45%; }
-                            80% { width: 80%; }
+                            30% { width: 25%; }
+                            60% { width: 55%; }
+                            85% { width: 85%; }
                             100% { width: 100%; }
                         }
 
                         /* Responsive */
                         @media (min-width: 768px) {
-                            .loader-letter {
-                                font-size: 2rem;
+                            .loader-ring-container {
+                                width: 130px;
+                                height: 130px;
                             }
-                            .loader-progress-track {
-                                width: 280px;
+                            .loader-logo-img {
+                                width: 56px;
+                                height: 56px;
+                            }
+                            .loader-brand-letter {
+                                font-size: 1.8rem;
+                            }
+                            .loader-bar-track {
+                                width: 240px;
                             }
                         }
                     `}</style>

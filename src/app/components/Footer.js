@@ -131,11 +131,31 @@ export default function Footer() {
         <div>
           <h4 className="text-lg font-semibold mb-4">Company</h4>
           <ul className="space-y-2 text-sm">
-            <li>About Us</li>
-            <li>Careers</li>
-            <li>Portfolio</li>
-            <li>Blog</li>
-            <li>Contact</li>
+            <li>
+              <Link href="/#home-section" className="hover:text-[#6E45E2] transition">
+                About Us
+              </Link>
+            </li>
+            <li>
+              <Link href="/careers" className="hover:text-[#6E45E2] transition">
+                Careers
+              </Link>
+            </li>
+            <li>
+              <Link href="/#portfolio-section" className="hover:text-[#6E45E2] transition">
+                Portfolio
+              </Link>
+            </li>
+            <li>
+              <Link href="/blog" className="hover:text-[#6E45E2] transition">
+                Blog
+              </Link>
+            </li>
+            <li>
+              <Link href="/contact" className="hover:text-[#6E45E2] transition">
+                Contact
+              </Link>
+            </li>
           </ul>
         </div>
 
@@ -170,18 +190,18 @@ export default function Footer() {
         viewport={{ once: false, amount: 0.3 }}
         className="border-t border-gray-300 mt-12 pt-6 text-center text-sm text-gray-600"
       >
-        <p>© 2025 vyomanexgen. All rights reserved.</p>
+        <p>© {new Date().getFullYear()} vyomanexgen. All rights reserved.</p>
 
         <div className="flex justify-center gap-6 mt-3">
-          <a href="#" className="hover:text-[#6E45E2]">
+          <Link href="/privacy-policy" className="hover:text-[#6E45E2] transition">
             Privacy Policy
-          </a>
-          <a href="#" className="hover:text-[#6E45E2]">
+          </Link>
+          <Link href="/terms-of-service" className="hover:text-[#6E45E2] transition">
             Terms of Service
-          </a>
-          <a href="#" className="hover:text-[#6E45E2]">
+          </Link>
+          <Link href="/cookie-policy" className="hover:text-[#6E45E2] transition">
             Cookie Policy
-          </a>
+          </Link>
         </div>
       </motion.div>
     </motion.footer>
