@@ -86,10 +86,6 @@ export default function Loader() {
                             ))}
                         </div>
 
-                        {/* Tagline */}
-                        <p className="loader-tagline">
-                            Digital Solutions for Modern Businesses
-                        </p>
 
                         {/* Progress Bar */}
                         <div className="loader-bar-track">
@@ -146,15 +142,6 @@ export default function Loader() {
                             animation: letterUp 0.4s ease-out forwards;
                         }
 
-                        /* === Tagline === */
-                        .loader-tagline {
-                            font-size: 0.8rem;
-                            color: rgba(148, 163, 184, 0.7);
-                            letter-spacing: 0.2em;
-                            text-transform: uppercase;
-                            opacity: 0;
-                            animation: fadeIn 0.5s ease-out 1.6s forwards;
-                        }
 
                         /* === Progress Bar === */
                         .loader-bar-track {
