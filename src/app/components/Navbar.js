@@ -25,7 +25,17 @@ export default function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [theme, setTheme] = useState("light"); // "light" | "dark"
   const [activeSection, setActiveSection] = useState("home-section"); // Default to home
+useEffect(() => {
+  if (menuOpen) {
+    document.body.style.overflow = "hidden";
+  } else {
+    document.body.style.overflow = "";
+  }
 
+  return () => {
+    document.body.style.overflow = "";
+  };
+}, [menuOpen]);
   // *** IMPORTANT ***
   // Ensure your Hero section component has id="home-section"
   const watchedSections = useMemo(
@@ -258,10 +268,10 @@ export default function Navbar() {
             animate={{ x: 0 }}
             exit={{ x: "100%" }}
             transition={{ duration: 0.35 }}
-            className={`fixed top-0 right-0 w-full h-screen overflow-y-auto flex flex-col p-6 pt-14 ${mobileMenuStyles[theme]} md:hidden`}
+            className={`fixed top-0 right-0 w-full h-[100dvh] overflow-y-auto overscroll-contain flex flex-col p-6 pt-14 ${mobileMenuStyles[theme]} md:hidden`}
 
 
-          //className={`fixed top-0 right-0 w-full h-screen flex flex-col items-center gap-10 p-10 ${mobileMenuStyles[theme]} md:hidden`}
+          //className={`fixed top-0 right-0 w-full h-[100dvh] flex flex-col items-center gap-10 p-10 ${mobileMenuStyles[theme]} md:hidden`}
           >
             {/* Top bar */}
             <div className="w-full flex justify-between items-center">
