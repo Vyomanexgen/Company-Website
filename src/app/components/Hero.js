@@ -20,7 +20,7 @@ export default function Hero() {
     <div className="w-full relative overflow-hidden text-gray-900" id="home-section">
 
       {/* -------------------- HERO WITH BACKGROUND -------------------- */}
-      <div className="w-full min-h-screen relative">
+      <div className="w-full min-h-[100dvh] relative overflow-hidden">
         {/* Optimized Background Image */}
         <Image
           src="/hero-banner.webp"
@@ -28,7 +28,7 @@ export default function Hero() {
           fill
           priority
           quality={75}
-          className="object-cover object-center"
+          className="object-cover object-center pointer-events-none select-none"
           sizes="100vw"
         />
 
@@ -37,14 +37,14 @@ export default function Hero() {
 
         {/* HERO CONTENT */}
         <div className="relative z-10">
-          <section className="flex flex-col items-center justify-center text-center pt-44 px-5">
+          <section className="flex flex-col items-center justify-center text-center pt-44 px-4 max-w-7xl mx-auto w-full">
 
             <motion.h1
               variants={fadeInLeft}
               initial="hidden"
               whileInView="visible"
               viewport={{ amount: 0.3, once: true }}
-              className="text-5xl md:text-6xl font-extrabold leading-tight mb-2 font-[Poppins] text-white"
+              className="text-4xl sm:text-5xl md:text-6xl leading-tight break-words font-extrabold leading-tight mb-2 font-[Poppins] text-white"
             >
               <span className="bg-gradient-to-r from-cyan-500 via-blue-600 to-purple-600 bg-clip-text text-transparent drop-shadow-md">
                 Transform Your Vision
