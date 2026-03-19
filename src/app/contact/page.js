@@ -95,21 +95,49 @@ export default function Contact() {
       </div>
 
 
-      {/* 🌈 HERO SECTION */}
-      <section className="relative h-[60vh] w-full flex flex-col justify-center items-center text-center overflow-hidden pt-28">
-        <div className="absolute inset-0 bg-gradient-to-b from-[#140C33] via-[#2B0A52] to-[#480042] z-0" />
-        <div className="absolute inset-0 z-0 opacity-[0.12] bg-[linear-gradient(to_right,rgba(255,255,255,0.08)_1px,transparent_1px),linear-gradient(to_bottom,rgba(255,255,255,0.08)_1px,transparent_1px)] bg-[size:40px_40px]" />
+      {/* 🌈 ENHANCED HERO SECTION */}
+      <section className="relative w-full pt-32 pb-32 lg:pt-40 lg:pb-40 flex flex-col justify-center items-center text-center overflow-hidden">
+        {/* Dark Premium Background WITHOUT Glows */}
+        <div className="absolute inset-0 bg-[#0A051E] z-0" />
 
-        <div className="relative z-10 flex flex-col items-center">
-          <button className="px-7 py-2 rounded-full text-white font-semibold bg-gradient-to-r from-blue-400 to-pink-500 shadow-lg">
-            Get in Touch
-          </button>
+        {/* Subtle Grid Pattern for Technical Feel */}
+        <div 
+          className="absolute inset-0 z-0 opacity-[0.10] bg-[linear-gradient(to_right,rgba(255,255,255,0.06)_1px,transparent_1px),linear-gradient(to_bottom,rgba(255,255,255,0.06)_1px,transparent_1px)] bg-[size:40px_40px]" 
+          style={{ maskImage: "radial-gradient(ellipse at center, black 40%, transparent 80%)", WebkitMaskImage: "radial-gradient(ellipse at center, black 40%, transparent 80%)" }} 
+        />
 
-          <p className="text-white mt-3 text-lg">Contact Us</p>
+        <div className="relative z-10 flex flex-col items-center px-6">
+          {/* Subtle Tagline */}
+          <motion.div 
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
+            className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full border border-white/10 bg-white/5 backdrop-blur-md shadow-xl mb-6"
+          >
+            <span className="w-2.5 h-2.5 rounded-full bg-blue-400 animate-pulse"></span>
+            <span className="text-sm font-medium tracking-wide text-blue-100 uppercase">We're here to help</span>
+          </motion.div>
 
-          <h3 className="text-white mt-4 text-2xl md:text-[26px] max-w-3xl leading-relaxed px-6">
-            Have a project in mind? Let's discuss how we can help bring your vision to life.
-          </h3>
+          {/* Epic Main Headline */}
+          <motion.h1 
+            initial={{ opacity: 0, scale: 0.95 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.8, delay: 0.1, ease: "easeOut" }}
+            className="text-4xl md:text-5xl lg:text-7xl font-extrabold text-white tracking-tight mb-6 leading-tight max-w-5xl"
+          >
+            Let's Build Something <br className="hidden md:block" />
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#4FACFE] to-[#00F2FE]">Extraordinary</span>
+          </motion.h1>
+
+          {/* Supporting Text */}
+          <motion.p 
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.3 }}
+            className="text-lg md:text-xl text-gray-300 max-w-2xl leading-relaxed mt-2 shadow-[0_4px_30px_rgba(0,0,0,0.1)] backdrop-blur-sm"
+          >
+            Have a bold idea? Need a digital transformation? Drop us a message below and let’s discuss how we can turn your vision into reality.
+          </motion.p>
         </div>
       </section>
 
@@ -211,6 +239,27 @@ export default function Contact() {
 
         </form>
 
+      </section>
+
+      {/* 🗺️ MAP SECTION */}
+      <section className="max-w-7xl mx-auto px-6 pb-20 relative z-[5]">
+        <motion.div 
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6 }}
+          className="w-full h-96 md:h-[500px] rounded-2xl overflow-hidden shadow-xl border border-gray-200"
+        >
+          <iframe
+            src="https://maps.google.com/maps?q=301,+KPHB+Main+Rd,+Bhagya+Nagar+Colony,+Hyderabad,+Telangana+500072&t=&z=15&ie=UTF8&iwloc=&output=embed"
+            width="100%"
+            height="100%"
+            style={{ border: 0 }}
+            allowFullScreen=""
+            loading="lazy"
+            referrerPolicy="no-referrer-when-downgrade"
+          ></iframe>
+        </motion.div>
       </section>
 
       <Footer />
