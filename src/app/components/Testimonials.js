@@ -80,8 +80,7 @@ export default function Testimonials() {
             viewport={{ once: true }}
             className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/5 border border-white/10 mb-6 shadow-xl"
           >
-            <FaStar className="text-yellow-400" size={14} />
-            <span className="text-sm font-semibold tracking-wide text-blue-100 uppercase">Trusted by 100+ Clients</span>
+
           </motion.div>
 
           <motion.h2

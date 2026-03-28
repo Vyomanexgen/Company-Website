@@ -20,11 +20,14 @@ const Logo = ({ theme }) => (
 );
 
 
-export default function Navbar() {
+export default function Navbar({ theme: externalTheme }) {
   const pathname = usePathname();
   const [menuOpen, setMenuOpen] = useState(false);
-  const [theme, setTheme] = useState("light"); // "light" | "dark"
+  const [internalTheme, setInternalTheme] = useState("light"); // "light" | "dark"
   const [activeSection, setActiveSection] = useState("home-section"); // Default to home
+
+  // Use externalTheme if provided, otherwise fallback to internalTheme
+  const theme = externalTheme || internalTheme;
 useEffect(() => {
   if (menuOpen) {
     document.body.style.overflow = "hidden";
@@ -88,7 +91,7 @@ useEffect(() => {
 
     if (pathname === "/contact") {
       newActive = "contact-section";
-      newTheme = "light";
+      newTheme = "dark";
     } else if (pathname === "/careers") {
       newActive = "careers-page";
       newTheme = "light"; // Or "dark" if you prefer
@@ -103,7 +106,7 @@ useEffect(() => {
     }
 
     setActiveSection(newActive);
-    setTheme(newTheme);
+    setInternalTheme(newTheme);
   }, [pathname]);
 
   // HOOK 2: Handles scroll-spy for homepage sections
@@ -112,35 +115,32 @@ useEffect(() => {
     if (pathname !== "/") return;
 
     // Set default for homepage load
-    setActiveSection("home-section");
-    setTheme("light");
-
-    // Handler to check scroll position and update active section
     const handleScroll = () => {
-      const scrollY = window.scrollY;
-
-      // If we're at the very top of the page, always set to home
-      if (scrollY < 100) {
-        setActiveSection("home-section");
-        setTheme("light");
-        return;
-      }
-
-      // Find which section is currently most visible
+      // Find which section is currently most visible in the viewport
       let currentSection = "home-section";
       let currentTheme = "light";
+      let maxVisibleHeight = 0;
+
+      // Handle very top of page specifically
+      if (window.scrollY < 50) {
+        setActiveSection("home-section");
+        setInternalTheme("light");
+        return;
+      }
 
       watchedSections.forEach(({ id, theme }) => {
         const element = document.getElementById(id);
         if (element) {
           const rect = element.getBoundingClientRect();
-          const elementTop = rect.top;
-          const elementBottom = rect.bottom;
+          
+          // Calculate how many pixels of this section are visible in the viewport
+          const visibleTop = Math.max(0, rect.top);
+          const visibleBottom = Math.min(window.innerHeight, rect.bottom);
+          const visibleHeight = Math.max(0, visibleBottom - visibleTop);
 
-          // Check if this section is in the viewport
-          // Consider a section active if its top is above the middle of the screen
-          // and its bottom is below the navbar
-          if (elementTop <= NAVBAR_HEIGHT + 100 && elementBottom > NAVBAR_HEIGHT) {
+          // If this section is more visible than (or as visible as) the previous winner, it becomes the active one
+          if (visibleHeight >= maxVisibleHeight && visibleHeight > 0) {
+            maxVisibleHeight = visibleHeight;
             currentSection = id;
             currentTheme = theme;
           }
@@ -148,7 +148,7 @@ useEffect(() => {
       });
 
       setActiveSection(currentSection);
-      setTheme(currentTheme);
+      setInternalTheme(currentTheme);
     };
 
     // Initial check

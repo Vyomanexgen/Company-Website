@@ -18,8 +18,8 @@ img, video {
 
 html, body {
   width: 100%;
-  
   overflow-x: hidden;
+  scroll-padding-top: 5rem;
 }
 
 body {
